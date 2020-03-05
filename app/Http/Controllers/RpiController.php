@@ -13,14 +13,16 @@ class RpiController extends Controller
      */
     public function index() {
         exec('cat /sys/class/thermal/thermal_zone0/temp 2>&1', $cpuTempVar);
-        exec("df -h 2>&1", $memVar);
+        // exec("", $totalMemVar);
+        // exec("", $usedMemVar);
         exec("df -h 2>&1", $filesystemVar);
 
 
         return view('dashboard.rpi.index', [
-            'cpuTemp'    => $cpuTempVar,
-            'memory'     => $memVar,
-            'filesystem' => $filesystemVar 
+            'cpuTemp'     => $cpuTempVar,
+            // 'totalMemory' => $totalMemVar,
+            // 'usedMemory'  => $usedMemVar,
+            'filesystem'  => $filesystemVar 
         ]);
     }
 }
