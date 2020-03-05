@@ -18,12 +18,13 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+//Auth::routes(['register' => false]);
 
 Route::prefix('dashboard')->middleware('auth')->group(function() {
     
+    Route::get('/home', 'HomeController@index')->name('home');
+
     Route::resource('/rpi', 'RpiController');
     Route::resource('/iridium', 'IridiumController');
 
 });
-
-Route::get('/home', 'HomeController@index')->name('home');
