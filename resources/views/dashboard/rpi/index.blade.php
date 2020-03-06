@@ -28,10 +28,10 @@
             <div class="card-header">Kernal Version</div>
             <div class="card-body">
                 {{-- <h5 class="card-title">CPU Temp</h5> --}}
-                {{-- <p class="card-text">{{ $cpuTemp[0] / 1000 }} C</p> --}}
+                <p class="card-text">{{ $cpuTemp[0] / 1000 }} C</p>
 
                 {{-- DEV USE ON QUBESOS --}}
-                <p class="card-text">{{ $version[0] }}</p> 
+                {{-- <p class="card-text">{{ $version[0] }}</p>  --}}
             </div>
             </div>
         </div>
