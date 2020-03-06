@@ -27,7 +27,7 @@
             <div class="card">
             <div class="card-header">Kernal Version</div>
             <div class="card-body">
-                <p class="card-text">{{ $versionVar[0]}}</p>
+                <p class="card-text">{{ $version[0]}}</p>
             </div>
             </div>
         </div>
