@@ -13,12 +13,16 @@ class RpiController extends Controller
      */
     public function index() {
         exec('cat /sys/class/thermal/thermal_zone0/temp 2>&1', $cpuTempVar);
+        exec("ifconfig -a", $ifconfigVar);
+        exec("uname -r", $versionVar);
+        exec("df -h 2>&1", $filesystemVar);
+
         exec("free -m|awk '/^Mem:/{print $2}'", $totalMemVar); // mb
         exec("free -m|awk '/^Mem:/{print $3}'", $usedMemVar); // mb
         exec("free -m|awk '/^Swap:/{print $2}'", $totalSwapVar); // mb
         exec("free -m|awk '/^Swap:/{print $3}'", $usedSwapVar); // mb
+       
 
-        exec("df -h 2>&1", $filesystemVar);
 
 
         return view('dashboard.rpi.index', [
@@ -27,7 +31,23 @@ class RpiController extends Controller
             'usedMemory'  => $usedMemVar,
             'totalSwap'   => $totalSwapVar,
             'usedSwap'    => $usedSwapVar,
-            'filesystem'  => $filesystemVar 
+            'filesystem'  => $filesystemVar, 
+            'ifconfig'    => $ifconfigVar,
+            'version'     => $versionVar
         ]);
+    }
+
+    /*
+    *  SHUTDOWN
+    */
+    public function shutdown() {
+        exec("shutdown now");
+    }
+
+    /*
+    *  RESTART
+    */
+    public function restart() {
+        exec("reboot --force");
     }
 }

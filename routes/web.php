@@ -21,11 +21,17 @@ Route::get('/', function () {
 Auth::routes();
 //Auth::routes(['register' => false]);
 
+
 Route::prefix('dashboard')->middleware('auth')->group(function() {
     
     Route::get('/home', 'HomeController@index')->name('home');
 
+    Route::get('/rpi/shutdown', 'RpiController@shutdown')->name('rpi.shutdown');
+    Route::get('/rpi/restart', 'RpiController@restart')->name('rpi.restart');
+    // Route::get('/rpi', 'RpiController@restart')->name('RpiController.restart');
     Route::resource('/rpi', 'RpiController');
+
+
     Route::resource('/iridium', 'IridiumController');
 
 });
