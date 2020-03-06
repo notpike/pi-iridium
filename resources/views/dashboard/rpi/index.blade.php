@@ -18,7 +18,7 @@
                 {{-- <p class="card-text">{{ $cpuTemp[0] / 1000 }} C</p> --}}
 
                 {{-- DEV USE ON QUBESOS --}}
-                <p class="card-text">{{ $cpuTemp[0] }} C</p> 
+                {{-- <p class="card-text">{{ $cpuTemp[0] }} C</p>  --}}
             </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
                 {{-- <p class="card-text">{{ $cpuTemp[0] / 1000 }} C</p> --}}
 
                 {{-- DEV USE ON QUBESOS --}}
-                <p class="card-text">{{ $version[0] }} C</p> 
+                <p class="card-text">{{ $version[0] }}</p> 
             </div>
             </div>
         </div>
