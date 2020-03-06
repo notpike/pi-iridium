@@ -15,10 +15,10 @@
             <div class="card">
             <div class="card-header">CPU Temp</div>
             <div class="card-body">
-                <p class="card-text">{{ $cpuTemp[0] / 1000 }} C</p>
+                {{-- <p class="card-text">{{ $cpuTemp[0] / 1000 }} C</p> --}}
 
                 {{-- DEV USE ON QUBESOS --}}
-                {{-- <p class="card-text">{{ $cpuTemp[0] }} C</p>  --}}
+                <p class="card-text">{{ $cpuTemp[0] }} C</p> 
             </div>
             </div>
         </div>

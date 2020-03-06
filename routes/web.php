@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,8 +19,9 @@ Route::get('/', function () {
 });
 
 
-Auth::routes();
-//Auth::routes(['register' => false]);
+// Auth Regiser
+// Auth::routes();
+Auth::routes(['register' => false]);
 
 
 Route::prefix('dashboard')->middleware('auth')->group(function() {
@@ -28,7 +30,6 @@ Route::prefix('dashboard')->middleware('auth')->group(function() {
 
     Route::get('/rpi/shutdown', 'RpiController@shutdown')->name('rpi.shutdown');
     Route::get('/rpi/restart', 'RpiController@restart')->name('rpi.restart');
-    // Route::get('/rpi', 'RpiController@restart')->name('RpiController.restart');
     Route::resource('/rpi', 'RpiController');
 
 
