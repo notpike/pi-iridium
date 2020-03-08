@@ -4,10 +4,14 @@
     <div class="card">
     <div class="card-header" >
         RPI Control
-        <a href="{{ route("rpi.shutdown") }}" class="float-right btn btn-danger btn-sm">SHUTDOWN</a>
-        <a href="{{ route("rpi.restart") }}" class="float-right btn btn-primary btn-sm">RESTART</a>
+        {{-- <a href="{{ route("rpi.index") }}" onclick="return confirm('Are you sure?')" class="float-right btn btn-danger btn-sm">SHUTDOWN</a>
+        <a href="{{ route("rpi.index") }}" onclick="return confirm('Are you sure?')" class="float-right btn btn-primary btn-sm">RESTART</a> --}}
+
+        <a href="{{ route("rpi.shutdown") }}" onclick="return confirm('Are you sure you want to SHUTDOWN?')" class="float-right btn btn-danger btn-sm">SHUTDOWN</a>
+        <a href="{{ route("rpi.restart") }}" onclick="return confirm('Are you sure you want to RESTART?')" class="float-right btn btn-primary btn-sm">RESTART</a>
     </div>
 
+    {{-- FIRST ROW --}}
     <div class="card-body">
     <div class="card-group">
 
@@ -34,6 +38,7 @@
     </div>
     </div>
 
+    {{-- SECOND ROW --}}
     <div class="card-body">
     <div class="card-group">
 
@@ -62,6 +67,7 @@
     </div>
     </div>
 
+    {{-- THIRD ROW --}}
     <div class="card-body">
     <div class="card-group">
 
@@ -98,6 +104,7 @@
     </div>
     </div>
 
+    {{-- FORTH ROW --}}
     <div class="card-body">
         <div class="card">
         <div class="card-header">dmesg</div>

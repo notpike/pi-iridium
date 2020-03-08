@@ -22,9 +22,6 @@ class RpiController extends Controller
         exec("free -m|awk '/^Swap:/{print $2}'", $totalSwapVar); // mb
         exec("free -m|awk '/^Swap:/{print $3}'", $usedSwapVar); // mb
         exec("dmesg 2>&1", $dmesgVar);
-       
-
-
 
         return view('dashboard.rpi.index', [
             'cpuTemp'     => $cpuTempVar,
