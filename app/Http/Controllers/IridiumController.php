@@ -12,8 +12,20 @@ class IridiumController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
+        exec('cat /sys/class/thermal/thermal_zone0/temp 2>&1', $cpuTempVar);
+        exec("uname -r", $versionVar);
+
         return view('dashboard.iridium.index', [
-            'data' => 'placeholder'
+            'cpuTemp'     => $cpuTempVar,
+            'version'     => $versionVar
         ]);
+    }
+
+    public function startIridium() {
+        
+    }
+
+    public function stopIridium() {
+        
     }
 }

@@ -21,6 +21,7 @@ class RpiController extends Controller
         exec("free -m|awk '/^Mem:/{print $3}'", $usedMemVar); // mb
         exec("free -m|awk '/^Swap:/{print $2}'", $totalSwapVar); // mb
         exec("free -m|awk '/^Swap:/{print $3}'", $usedSwapVar); // mb
+        exec("dmesg 2>&1", $dmesgVar);
        
 
 
@@ -33,7 +34,8 @@ class RpiController extends Controller
             'usedSwap'    => $usedSwapVar,
             'filesystem'  => $filesystemVar, 
             'ifconfig'    => $ifconfigVar,
-            'version'     => $versionVar
+            'version'     => $versionVar,
+            'dmesg'       => $dmesgVar
         ]);
     }
 
