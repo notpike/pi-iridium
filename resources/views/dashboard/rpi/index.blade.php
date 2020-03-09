@@ -47,8 +47,12 @@
             <div class="card-header">Memory</div>
             <div class="card-body">
                 <p class="card-text">Total: {{ $totalMemory[0] }} MB</p>
-                <p class="card-text">Used: {{ $usedMemory[0] }} MB</p>
-                <p class="card-text">Free: {{ $totalMemory[0] - $usedMemory[0] }} MB</p>
+                {{-- <p class="card-text">Used: {{ $usedMemory[0] }} MB</p>
+                <p class="card-text">Free: {{ $totalMemory[0] - $usedMemory[0] }} MB</p> --}}
+
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{ ($usedMemory[0] / $totalMemory[0]) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ ($usedMemory[0] / $totalMemory[0]) * 100 }}%">{{ $usedMemory[0] }} MB</div>
+                </div>
             </div>
             </div>
         </div>
@@ -58,8 +62,13 @@
             <div class="card-header">Swap</div>
             <div class="card-body">
                 <p class="card-text">Total: {{ $totalSwap[0] }} MB</p>
-                <p class="card-text">Used: {{ $usedSwap[0] }} MB</p>
-                <p class="card-text">Free: {{ $totalSwap[0] - $usedSwap[0] }} MB</p>
+                {{-- <p class="card-text">Used: {{ $usedSwap[0] }} MB</p>
+                <p class="card-text">Free: {{ $totalSwap[0] - $usedSwap[0] }} MB</p> --}}
+
+
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{ ($usedSwap[0] / $totalSwap[0]) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ ($usedSwap[0] / $totalSwap[0]) * 100 }}%">{{ $usedSwap[0] }} MB</div>
+                </div>
             </div>
             </div>
         </div>
@@ -86,6 +95,21 @@
             </div>
         </div>
 
+                {{-- <div class="col-sm-6">
+                    <div class="card">
+                    <div class="card-header">lsusb</div>
+                    <div class="card-body">
+                        <p class="card-text">
+<pre>
+@foreach($lsusb as $data)
+{{ $data }}
+@endforeach
+</pre>  
+                        </p>
+                    </div>
+                    </div>
+                </div> --}}
+
     <div class="col-sm-6">
             <div class="card">
             <div class="card-header">ifconfig</div>
@@ -105,6 +129,22 @@
     </div>
 
     {{-- FORTH ROW --}}
+    <div class="card-body">
+            <div class="card">
+            <div class="card-header">lsusb</div>
+            <div class="card-body">
+                <p class="card-text">
+<pre>
+@foreach($lsusb as $data)
+{{ $data }}
+@endforeach
+</pre>  
+                </p>
+            </div>
+            </div>
+        </div>
+
+    {{-- Fith ROW --}}
     <div class="card-body">
         <div class="card">
         <div class="card-header">dmesg</div>

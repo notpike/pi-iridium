@@ -16,12 +16,13 @@ class RpiController extends Controller
         exec("ifconfig -a", $ifconfigVar);
         exec("uname -r", $versionVar);
         exec("df -h 2>&1", $filesystemVar);
+        exec("dmesg 2>&1", $dmesgVar);
+        exec("lsusb 2>&1", $lsusbVar);
 
         exec("free -m|awk '/^Mem:/{print $2}'", $totalMemVar); // mb
         exec("free -m|awk '/^Mem:/{print $3}'", $usedMemVar); // mb
         exec("free -m|awk '/^Swap:/{print $2}'", $totalSwapVar); // mb
         exec("free -m|awk '/^Swap:/{print $3}'", $usedSwapVar); // mb
-        exec("dmesg 2>&1", $dmesgVar);
 
         return view('dashboard.rpi.index', [
             'cpuTemp'     => $cpuTempVar,
@@ -32,7 +33,8 @@ class RpiController extends Controller
             'filesystem'  => $filesystemVar, 
             'ifconfig'    => $ifconfigVar,
             'version'     => $versionVar,
-            'dmesg'       => $dmesgVar
+            'dmesg'       => $dmesgVar,
+            'lsusb'       => $lsusbVar
         ]);
     }
 
