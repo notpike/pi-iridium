@@ -107,5 +107,15 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>  
 
+    {{-- websocket --}}
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        Echo.channel('iridium')
+        .listen('Iridium', (e) => {
+            // console.log(e.message);
+            document.getElementById('output').innerHTML += e.message + '\n';
+        })
+    </script>
+
 </body>
 </html>
