@@ -24,8 +24,17 @@ class IridiumController extends Controller
 
 
     // sudo iridium-extractor -D 4 software/gr-iridium/examples/rtl-sdr-T.conf | grep "A:OK" > Iridium/output/output3.bits
-    public function startIridium() {
-        IridiumJob::dispatch();
+    public function startIridium(Request $request) {
+        // $request->validate($request, [
+        //     'd'      => 'required',
+        //     'config' => 'required',
+        //     'filename' => 'required'
+        // ]);
+
+        $store = $request->all();
+        
+
+        IridiumJob::dispatch($store);
         return redirect()->back();
     }
 

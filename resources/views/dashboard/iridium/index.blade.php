@@ -8,8 +8,17 @@
     <div class="card-group">
         <div class="card">
         <div class="card-header">Iridium-Extractor
-                <a href="{{ route("iridium.startIridium") }}"  class="float-right btn btn-danger btn-sm">START</a>
-                <a href="{{ route("iridium.stopIridium") }}"  class="float-right btn btn-danger btn-sm">STOP</a>
+
+
+                <form action="{{ route('iridium.startIridium') }}" method="POST">
+                    {{csrf_field()}}
+                    {{method_field('PUT')}}
+                    <label for="filename">File Name:</label> 
+                    <input type="text" id="filename" name="filename" size="20" value="output.bin">
+
+                    <a href="{{ route("iridium.stopIridium") }}"  class="float-right btn btn-danger">STOP</a>
+                    <button type="submit" class="float-right btn btn-primary">{{ $submitButtonText ?? 'START' }}</button>
+                </form>
         </div>
 
         {{-- websocket --}}

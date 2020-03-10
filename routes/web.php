@@ -34,7 +34,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function() {
     Route::resource('/rpi', 'RpiController');
 
 
-    Route::get('/iridium/startIridium', 'IridiumController@startIridium')->name('iridium.startIridium');
+    Route::put('/iridium/startIridium', 'IridiumController@startIridium')->name('iridium.startIridium');
     Route::get('/iridium/stopIridium', 'IridiumController@stopIridium')->name('iridium.stopIridium');
     Route::get('/iridium/readIridium', 'IridiumController@readIridium')->name('iridium.readIridium');
     Route::resource('/iridium', 'IridiumController');

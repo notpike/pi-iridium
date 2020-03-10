@@ -15,7 +15,7 @@ class IridiumJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $proc;
-    public $request;
+    public $init;
 
     /**
      * Create a new job instance.
@@ -26,9 +26,9 @@ class IridiumJob implements ShouldQueue
     // {
     //     $this->request = $request;
     // }
-    public function __construct()
+    public function __construct($init)
     {
-
+        $this->init = $init;
     }
 
 
