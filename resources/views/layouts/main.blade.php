@@ -112,9 +112,14 @@
     <script>
         Echo.channel('iridium')
         .listen('Iridium', (e) => {
-            // console.log(e.message);
             document.getElementById('output').innerHTML += e.message + '\n';
         })
+
+        // Echo.private(`iridium`)
+        //     .listen('Iridium', (e) => {
+        //      console.log(e.message);
+        //      document.getElementById('output').innerHTML += e.message + '\n';
+        //  });
     </script>
 
 </body>
