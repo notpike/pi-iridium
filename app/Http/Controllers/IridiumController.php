@@ -29,8 +29,8 @@ class IridiumController extends Controller
         return redirect()->back();
     }
 
+    // Killall hack FTW! >:D
     public function stopIridium() {
-        // dd(Artisan::call('queue:restart'));
         $cmd = 'killall ping';
         $stdout = shell_exec($cmd);
         // dd($stdout);
