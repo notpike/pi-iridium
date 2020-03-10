@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use App\Events\Iridium;
 use App\Jobs\IridiumJob;
+use Artisan;
 
 class IridiumController extends Controller
 {
@@ -30,6 +30,10 @@ class IridiumController extends Controller
     }
 
     public function stopIridium() {
+        // dd(Artisan::call('queue:restart'));
+        $cmd = 'killall ping';
+        $stdout = shell_exec($cmd);
+        // dd($stdout);
         return redirect()->back();
     }
 }
