@@ -115,7 +115,7 @@
         //     document.getElementById('output').innerHTML += e.message + '\n';
         // })
 
-        Echo.private(`iridium`)
+        Echo.private('iridium')
             .listen('IridiumBroadcast', (e) => {
             console.log(e.message);
             document.getElementById('output').innerHTML += e.message + '\n';
