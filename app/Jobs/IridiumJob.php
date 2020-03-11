@@ -7,8 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Events\IridiumBrodcast;
-use Illuminate\Http\Request;
+use App\Events\IridiumBroadcast;
 
 class IridiumJob implements ShouldQueue
 {
@@ -44,7 +43,7 @@ class IridiumJob implements ShouldQueue
         $cmd = 'ping 1.1.1.1';
         $this->proc = popen($cmd, 'r');
         while (!feof($this->proc)) {
-            broadcast(new IridiumBrodcast(fread($this->proc, 4096)));
+            broadcast(new IridiumBroadcast(fread($this->proc, 4096)));
         }
     }
 }

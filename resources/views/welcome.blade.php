@@ -89,7 +89,7 @@
 
         {{-- websocket --}}
     <script src="{{ asset('js/app.js') }}"></script>
-    <script>
+    <!-- <script>
         // Echo.channel('iridium')
         // .listen('IridiumBrodcast', (e) => {
         //     document.getElementById('output').innerHTML += e.message + '\n';
@@ -100,7 +100,7 @@
             console.log(e.message);
             document.getElementById('output').innerHTML += e.message + '\n';
          })
-    </script>
+    </script> -->
 
     </body>
 </html>

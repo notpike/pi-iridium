@@ -8,8 +8,6 @@ use App\Jobs\IridiumJob;
 
 class IridiumController extends Controller
 {
-    public $job;
-
     /**
      * Display a listing of the resource.
      *
@@ -33,9 +31,7 @@ class IridiumController extends Controller
 
         $store = $request->all();
         
-        broadcast(new IridiumBroadcast("Test"));
-
-        // IridiumJob::dispatch($store);
+        IridiumJob::dispatch($store);
         return redirect()->back();
     }
 
