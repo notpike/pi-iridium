@@ -37,7 +37,7 @@ class IridiumBroadcast implements ShouldBroadcastNow
 
     public function broadcastOn()
     {
-        return new PrivateChannel('iridium');
+        return new Channel('iridium');
     }
 
     /**
