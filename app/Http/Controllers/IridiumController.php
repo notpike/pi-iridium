@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\IridiumBroadcast;
 use Illuminate\Http\Request;
 use App\Jobs\IridiumJob;
-use Artisan;
 
 class IridiumController extends Controller
 {
@@ -33,8 +33,9 @@ class IridiumController extends Controller
 
         $store = $request->all();
         
+        broadcast(new IridiumBroadcast("Test"));
 
-        IridiumJob::dispatch($store);
+        // IridiumJob::dispatch($store);
         return redirect()->back();
     }
 

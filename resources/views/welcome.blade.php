@@ -87,16 +87,20 @@
             </div>
         </div>
 
-    {{-- websocket
-    <p id="output"></p>
+        {{-- websocket --}}
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
-        Echo.channel('iridium')
-        .listen('Iridium', (e) => {
+        // Echo.channel('iridium')
+        // .listen('IridiumBrodcast', (e) => {
+        //     document.getElementById('output').innerHTML += e.message + '\n';
+        // })
+
+        Echo.private(`iridium`)
+            .listen('IridiumBrodcast', (e) => {
             console.log(e.message);
-            document.getElementById('output').innerHTML = e.message;
-        })
-    </script> --}}
+            document.getElementById('output').innerHTML += e.message + '\n';
+         })
+    </script>
 
     </body>
 </html>

@@ -10,11 +10,11 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class Iridium implements ShouldBroadcastNow
+class IridiumBroadcast implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $message;
+    private $message;
     /**
      * Create a new event instance.
      *
@@ -30,9 +30,25 @@ class Iridium implements ShouldBroadcastNow
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
+    // public function broadcastOn()
+    // {
+    //     return new Channel('iridium');
+    // }
+
     public function broadcastOn()
     {
-        return new Channel('iridium');
+        return new PrivateChannel('iridium');
+    }
+
+    /**
+     * Get the data to broadcast.
+     * Use this to limit what get's sent to the client
+     * 
+     * @return array
+     */
+    public function broadcastWith()
+    {
+        return ['message' => $this->message];
     }
 
 }

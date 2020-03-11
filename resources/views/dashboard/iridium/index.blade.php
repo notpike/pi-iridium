@@ -16,8 +16,8 @@
                     <label for="filename">File Name:</label> 
                     <input type="text" id="filename" name="filename" size="20" value="output.bin">
 
-                    <a href="{{ route("iridium.stopIridium") }}"  class="float-right btn btn-danger">STOP</a>
-                    <button type="submit" class="float-right btn btn-primary">{{ $submitButtonText ?? 'START' }}</button>
+                    <a href="{{ route('iridium.stopIridium') }}"  class="float-right btn btn-danger">STOP</a>
+                    <button type="submit" class="float-right btn btn-primary">START</button>
                 </form>
         </div>
 
