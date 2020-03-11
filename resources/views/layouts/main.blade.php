@@ -110,16 +110,16 @@
     {{-- websocket --}}
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
-        // Echo.channel('iridium')
-        // .listen('IridiumBroadcast', (e) => {
-        //     document.getElementById('output').innerHTML += e.message + '\n';
-        // })
-
-        Echo.private(`iridium`)
-            .listen('IridiumBroadcast', (e) => {
-            console.log(e.message);
+        Echo.channel('iridium')
+        .listen('IridiumBroadcast', (e) => {
             document.getElementById('output').innerHTML += e.message + '\n';
-         })
+        })
+
+        // Echo.private(`iridium`)
+        //     .listen('IridiumBroadcast', (e) => {
+        //     console.log(e.message);
+        //     document.getElementById('output').innerHTML += e.message + '\n';
+        //  })
     </script>
 
 </body>
