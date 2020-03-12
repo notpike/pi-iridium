@@ -67,6 +67,16 @@
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                 @csrf
                                             </form>
+
+                                            <a class="dropdown-item" href="{{ route('changePasswordView') }}"
+                                               onclick="event.preventDefault();
+                                                             document.getElementById('password-form').submit();">
+                                                {{ __('Change Password') }}
+                                            </a>
+        
+                                            <form id="password-form" action="{{ route('changePasswordView') }}" method="GET" style="display: none;">
+                                                @csrf
+                                            </form>
                                         </div>
                                     </li>
                                 @endguest

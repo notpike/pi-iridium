@@ -39,4 +39,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function() {
     Route::get('/iridium/readIridium', 'IridiumController@readIridium')->name('iridium.readIridium');
     Route::resource('/iridium', 'IridiumController');
 
+    Route::get('/changePassword','HomeController@showChangePasswordForm')->name('changePasswordView');
+    Route::post('/changePassword','HomeController@changePassword')->name('changePassword');
+
 });
