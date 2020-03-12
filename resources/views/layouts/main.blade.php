@@ -123,17 +123,17 @@
         Echo.channel('iridium')
         .listen('IridiumBroadcast', (e) => {
             document.getElementById('output').innerHTML += e.message + '\n';
-        })
+        });
 
         Echo.channel('iridium-decode')
-        .listen('IridiumBroadcast', (e) => {
+        .listen('IridiumBroadcastDecode', (e) => {
             document.getElementById('output_decode').innerHTML += e.message + '\n';
-        })
+        });
 
         Echo.channel('iridium-voice')
-        .listen('IridiumBroadcast', (e) => {
+        .listen('IridiumBroadcastVoice', (e) => {
             document.getElementById('output_voice').innerHTML += e.message + '\n';
-        })
+        });
 
         // Echo.private(`iridium`)
         //     .listen('IridiumBroadcast', (e) => {

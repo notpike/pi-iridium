@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Events\IridiumBroadcast;
+use App\Events\IridiumBroadcastVoice;
 
 class IridiumJobVoice implements ShouldQueue
 {
@@ -40,10 +40,10 @@ class IridiumJobVoice implements ShouldQueue
         //         . ' ' . $this->init['config'] 
         //         . ' ' . '| grep "A:OK" > ' . escapeshellarg($this->init['filename']);
 
-        $cmd = 'ping 1.1.1.1';
+        $cmd = 'ping 8.8.8.8';
         $this->proc = popen($cmd, 'r');
         while (!feof($this->proc)) {
-            broadcast(new IridiumBroadcast(fread($this->proc, 4096)));
+            broadcast(new IridiumBroadcastVoice(fread($this->proc, 4096)));
         }
     }
 }

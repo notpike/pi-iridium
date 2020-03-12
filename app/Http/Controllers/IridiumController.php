@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Jobs\IridiumJob;
+use App\Jobs\IridiumJobDecode;
+use App\Jobs\IridiumJobVoice;
+
 use Carbon\Carbon;
 
 class IridiumController extends Controller
@@ -28,6 +31,7 @@ class IridiumController extends Controller
             'time' => Carbon::now()->timestamp
         ]);
     }
+
 
     public function startIridium(Request $request) {
         // Kill any running processes
@@ -59,4 +63,67 @@ class IridiumController extends Controller
         $stdout = shell_exec($cmd);
         return redirect()->back();
     }
+
+
+    public function startDecode(Request $request) {
+        // Kill any running processes
+        $this->stopDecode();
+
+        // catureFile select
+        $cdir = scandir(env('GR_IRIDIUM'));
+        foreach ($cdir as $key => $value) {         // Removes "." and ".."
+            if(!in_array($value,array(".",".."))) {
+                $config[] = $value;
+            }
+        }
+
+        $this->validate($request, [
+            'mode'      => 'required',
+            'captureFile' =>  'required | in:' . implode(',', $config),
+            'filename' => 'required'
+        ]);
+
+        $store = $request->all();
+        IridiumJobDecode::dispatch($store);
+
+        return redirect()->back();
+    }
+
+    // KillAll hack FTW! >:D
+    public function stopDecode() {
+        $cmd = 'killall ping';
+        $stdout = shell_exec($cmd);
+        return redirect()->back();
+    }
+
+    public function startVoice(Request $request) {
+        // Kill any running processes
+        $this->stopVoice();
+
+        // catureFile select
+        $cdir = scandir(env('GR_IRIDIUM'));
+        foreach ($cdir as $key => $value) {         // Removes "." and ".."
+            if(!in_array($value,array(".",".."))) {
+                $config[] = $value;
+            }
+        }
+
+        $this->validate($request, [
+            'captureFile' =>  'required | in:' . implode(',', $config),
+            'filename' => 'required'
+        ]);
+
+        $store = $request->all();
+        IridiumJobVoice::dispatch($store);
+
+        return redirect()->back();
+    }
+
+    // KillAll hack FTW! >:D
+    public function stopVoice() {
+        $cmd = 'killall ping';
+        $stdout = shell_exec($cmd);
+        return redirect()->back();
+    }    
+
 }

@@ -36,6 +36,13 @@ Route::prefix('dashboard')->middleware('auth')->group(function() {
 
     Route::put('/iridium/startIridium', 'IridiumController@startIridium')->name('iridium.startIridium');
     Route::get('/iridium/stopIridium', 'IridiumController@stopIridium')->name('iridium.stopIridium');
+
+    Route::put('/iridium/startDecode', 'IridiumController@startDecode')->name('iridium.startDecode');
+    Route::get('/iridium/stopDecode', 'IridiumController@stopDecode')->name('iridium.stopDecode');
+
+    Route::put('/iridium/startVoice', 'IridiumController@startVoice')->name('iridium.startVoice');
+    Route::get('/iridium/stopVoice', 'IridiumController@stopVoice')->name('iridium.stopVoice');
+
     Route::get('/iridium/readIridium', 'IridiumController@readIridium')->name('iridium.readIridium');
     Route::resource('/iridium', 'IridiumController');
 

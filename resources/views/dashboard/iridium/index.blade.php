@@ -55,7 +55,7 @@
     <div class="card-body">
         <div class="card">
         <div class="card-header">Decode
-                <form action="" method="POST">
+                <form action="{{ route('iridium.startDecode') }}" method="POST">
                     {{csrf_field()}}
                     {{method_field('PUT')}}
 
@@ -94,7 +94,7 @@
     <div class="card-body">
         <div class="card">
         <div class="card-header">Voice Decodeing
-                <form action="" method="POST">
+                <form action="{{ route('iridium.startVoice') }}" method="POST">
                     {{csrf_field()}}
                     {{method_field('PUT')}}
 
@@ -110,7 +110,7 @@
                     <label for="d">Output File:</label> 
                     <input type="text" id="filename" name="filename" size="20" value="{{ 'vox_' . $time . '.wav'}}">
 
-                    <a href="{{ route('iridium.stopIridium') }}"  class="float-right btn btn-danger">STOP</a>
+                    <a href="{{ route('iridium.stopVoice') }}"  class="float-right btn btn-danger">STOP</a>
                     <button type="submit" class="float-right btn btn-primary">START</button>
                 </form>
         </div>  
