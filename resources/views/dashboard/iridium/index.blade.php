@@ -3,13 +3,11 @@
 @section('content')
     <div class="card">
     <div class="card-header">Iridium Control</div>
-    
+   
+    <!-- First Row -->
     <div class="card-body">
-    <div class="card-group">
         <div class="card">
         <div class="card-header">Iridium-Extractor
-
-
                 <form action="{{ route('iridium.startIridium') }}" method="POST">
                     {{csrf_field()}}
                     {{method_field('PUT')}}
@@ -39,25 +37,88 @@
 
                     &nbsp
 
-                    <label for="d">Output File Name:</label> 
+                    <label for="d">Output File:</label> 
                     <input type="text" id="filename" name="filename" size="20" value="{{ 'output_' . $time . '.bin'}}">
 
                     <a href="{{ route('iridium.stopIridium') }}"  class="float-right btn btn-danger">STOP</a>
                     <button type="submit" class="float-right btn btn-primary">START</button>
                 </form>
         </div>
+            {{-- websocket --}}
+            {{-- php artisan websockets:serve --}}
+            {{-- Tinker: >>> event(new App\Events\Iridium("message")) --}}
+            <textarea readonly class="card-text" id="output" rows="20"></textarea >
+        </div>
+    </div>
 
-        {{-- websocket --}}
-        {{-- php artisan websockets:serve --}}
-        {{-- Tinker: >>> event(new App\Events\Iridium("message")) --}}
-        <textarea readonly class="card-text" id="output" rows="20"></textarea >
+    <!-- Second Row -->
+    <div class="card-body">
+        <div class="card">
+        <div class="card-header">Decode
+                <form action="" method="POST">
+                    {{csrf_field()}}
+                    {{method_field('PUT')}}
 
-         
+                    <label for="filename">Mode:</label> 
+                    <select id = "mode" name="mode">
+                        <option value = "ida">ida</option>
+                        <option value = "lap">lap</option>
+                        <option value = "page">page</option>
+                        <option value = "msg" selected>msg</option>
+                    </select>
+
+                    &nbsp
+
+                    <label for="captureFile">Capture File</label> 
+                    <select id = "captureFile" name="captureFile" value="4">
+                        @foreach ($data as $d)
+                            <option value="{{ $d }}">{{ $d }}</option>
+                        @endforeach
+                    </select>
+
+                    &nbsp
+
+                    <label for="d">Output File:</label> 
+                    <input type="text" id="filename" name="filename" size="20" value="{{ 'decode_' . $time . '.txt'}}">
+
+                    <a href="{{ route('iridium.stopIridium') }}"  class="float-right btn btn-danger">STOP</a>
+                    <button type="submit" class="float-right btn btn-primary">START</button>
+                </form>
+        </div>   
+            <textarea readonly class="card-text" id="output_decode" rows="10"></textarea >
         </div>
     </div>
 
 
-    </div>      
+    <!-- Third Row -->
+    <div class="card-body">
+        <div class="card">
+        <div class="card-header">Voice Decodeing
+                <form action="" method="POST">
+                    {{csrf_field()}}
+                    {{method_field('PUT')}}
+
+                    <label for="captureFile">Capture File</label> 
+                    <select id = "captureFile" name="captureFile" value="4">
+                        @foreach ($data as $d)
+                            <option value="{{ $d }}">{{ $d }}</option>
+                        @endforeach
+                    </select>
+
+                    &nbsp
+
+                    <label for="d">Output File:</label> 
+                    <input type="text" id="filename" name="filename" size="20" value="{{ 'vox_' . $time . '.wav'}}">
+
+                    <a href="{{ route('iridium.stopIridium') }}"  class="float-right btn btn-danger">STOP</a>
+                    <button type="submit" class="float-right btn btn-primary">START</button>
+                </form>
+        </div>  
+            <textarea readonly class="card-text" id="output_voice" rows="10"></textarea >
+        </div>
     </div>
+
+
+</div>
 
 @endsection

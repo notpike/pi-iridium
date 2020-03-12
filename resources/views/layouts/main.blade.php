@@ -125,6 +125,16 @@
             document.getElementById('output').innerHTML += e.message + '\n';
         })
 
+        Echo.channel('iridium-decode')
+        .listen('IridiumBroadcast', (e) => {
+            document.getElementById('output_decode').innerHTML += e.message + '\n';
+        })
+
+        Echo.channel('iridium-voice')
+        .listen('IridiumBroadcast', (e) => {
+            document.getElementById('output_voice').innerHTML += e.message + '\n';
+        })
+
         // Echo.private(`iridium`)
         //     .listen('IridiumBroadcast', (e) => {
         //     console.log(e.message);
