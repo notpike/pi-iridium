@@ -23,7 +23,7 @@ class IridiumController extends Controller
             }
         }
 
-        $cdir = scandir(env('PI_IRIDIUM_ROOT') . '/' . env('LOOT_CAPTURE'));
+        $cdir = scandir(base_path() . '/' . env('LOOT_CAPTURE'));
         // Removes "." and ".."
         foreach ($cdir as $key => $value) {
             if(!in_array($value,array(".",".."))) {
@@ -82,7 +82,7 @@ class IridiumController extends Controller
     public function startDecode(Request $request) {
 
         // catureFile select
-        $cdir = scandir(env('PI_IRIDIUM_ROOT') . '/' . env('LOOT_CAPTURE'));
+        $cdir = scandir(base_path() . '/' . env('LOOT_CAPTURE'));
         foreach ($cdir as $key => $value) {         // Removes "." and ".."
             if(!in_array($value,array(".",".."))) {
                 $config[] = $value;
@@ -117,7 +117,7 @@ class IridiumController extends Controller
     public function startVoice(Request $request) {
 
         // Capture File Select
-        $cdir = scandir(env('PI_IRIDIUM_ROOT') . '/' . env('LOOT_CAPTURE'));
+        $cdir = scandir(base_path() . '/' . env('LOOT_CAPTURE'));
         foreach ($cdir as $key => $value) {         // Removes "." and ".."
             if(!in_array($value,array(".",".."))) {
                 $config[] = $value;

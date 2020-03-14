@@ -11,7 +11,9 @@ echo ''
 
 ### LARAVEL INIT
 echo '== INIT LARAVEL =='
-composer install
-npm install
-php artisan migrate:fresh
-php artisan db:seed
+cp .env.example .env      #Copys example .env to live .env
+composer install          #Loads all Required PHP Scripts
+npm install               #ECHO compile for client
+php artisan key:generate  #App Key Generation
+php artisan migrate:fresh #Push DB Tables into DB
+php artisan db:seed       #Seed DB with defult values
