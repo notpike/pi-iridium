@@ -46,7 +46,7 @@ class IridiumJob implements ShouldQueue
             // sudo iridium-extractor -D 4 software/gr-iridium/examples/rtl-sdr-T.conf | grep "A:OK" > Iridium/output/output3.bits
             $cmd = 'iridium-extractor -D ' 
                     . trim(escapeshellarg($this->init['d']), '\'') 
-                    . ' ' .  env('GR_IRIDIUM') . '/' . trim($this->init['config'], '\'' ) 
+                    . ' ' .  env('GR_IRIDIUM') . '/examples/' . trim($this->init['config'], '\'' ) 
                     . ' ' . '| grep "A:OK" > ' . base_path() . '/' . env('LOOT_CAPTURE') . '/' . trim(escapeshellarg($this->init['filename']),'\'');
 
             dd($cmd);
