@@ -11,11 +11,8 @@ use Carbon\Carbon;
 
 class IridiumController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function index() {
         // SDR Config builder
         $cdir = scandir(env('GR_IRIDIUM'). '/examples');
@@ -66,6 +63,7 @@ class IridiumController extends Controller
         return redirect()->back();
     }
 
+
     // KillAll hack FTW! >:D
     public function stopIridium() {
         // Clear Jobs
@@ -82,8 +80,6 @@ class IridiumController extends Controller
 
 
     public function startDecode(Request $request) {
-        // Kill any running processes
-        // $this->stopDecode();
 
         // catureFile select
         $cdir = scandir(env('PI_IRIDIUM_ROOT') . '/' . env('LOOT_CAPTURE'));
@@ -105,22 +101,20 @@ class IridiumController extends Controller
         return redirect()->back();
     }
 
+    
     // KillAll hack FTW! >:D
     public function stopDecode() {
         if(env('APP_DEBUG')) {
             $cmd = 'killall ping';
             $stdout = shell_exec($cmd);
         } else {
-            // $cmd = 'killall iridium-extractor';
-            // $stdout = shell_exec($cmd);
+            // Logic?
         }
 
         return redirect()->back();
     }
 
     public function startVoice(Request $request) {
-        // Kill any running processes
-        // $this->stopVoice();
 
         // Capture File Select
         $cdir = scandir(env('PI_IRIDIUM_ROOT') . '/' . env('LOOT_CAPTURE'));
@@ -147,8 +141,7 @@ class IridiumController extends Controller
             $cmd = 'killall ping';
             $stdout = shell_exec($cmd);
         } else {
-            // $cmd = 'killall iridium-extractor';
-            // $stdout = shell_exec($cmd);
+            // Logic?
         }
         return redirect()->back();
     }    
