@@ -34,12 +34,6 @@ class IridiumJob implements ShouldQueue
      */
     public function handle()
     {
-        // $cmd = 'ping 1.1.1.1';
-        // $this->proc = popen($cmd, 'r');
-        
-        // while (!feof($this->proc)) {
-        //     broadcast(new IridiumBroadcast(fread($this->proc, 4096)));
-        // }
 
         if(env('APP_DEBUG')) {
             $cmd = 'ping 1.1.1.1';
@@ -59,6 +53,6 @@ class IridiumJob implements ShouldQueue
                 broadcast(new IridiumBroadcast(fread($this->proc, 4096)));
             }
 
-        // }
+        }
     }
 }
