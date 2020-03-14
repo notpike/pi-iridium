@@ -35,7 +35,7 @@ class IridiumController extends Controller
 
     public function startIridium(Request $request) {
         // Kill any running processes
-        $this->stopIridium();
+        // $this->stopIridium();
 
         // SDR Config builder
         $cdir = scandir(env('GR_IRIDIUM'). '/examples');
@@ -72,7 +72,7 @@ class IridiumController extends Controller
 
     public function startDecode(Request $request) {
         // Kill any running processes
-        $this->stopDecode();
+        // $this->stopDecode();
 
         // catureFile select
         $cdir = scandir(env('GR_IRIDIUM'));
