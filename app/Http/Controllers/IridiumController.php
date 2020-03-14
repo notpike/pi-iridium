@@ -26,8 +26,17 @@ class IridiumController extends Controller
             }
         }
 
+        $cdir = scandir(env('PI_IRIDIUM_ROOT') . '/' . env('LOOT_CAPTURE'));
+        // Removes "." and ".."
+        foreach ($cdir as $key => $value) {
+            if(!in_array($value,array(".",".."))) {
+                $capture[] = $value;
+            }
+        }
+
         return view('dashboard.iridium.index', [
-            'data' => $config,
+            'data_config'  => $config,
+            'data_capture' => $capture,
             'time' => Carbon::now()->timestamp
         ]);
     }
@@ -59,6 +68,8 @@ class IridiumController extends Controller
 
     // KillAll hack FTW! >:D
     public function stopIridium() {
+        // Clear Jobs
+
         if(env('APP_DEBUG')) {
             $cmd = 'killall ping';
             $stdout = shell_exec($cmd);
@@ -75,7 +86,7 @@ class IridiumController extends Controller
         // $this->stopDecode();
 
         // catureFile select
-        $cdir = scandir(env('GR_IRIDIUM'));
+        $cdir = scandir(env('PI_IRIDIUM_ROOT') . '/' . env('LOOT_CAPTURE'));
         foreach ($cdir as $key => $value) {         // Removes "." and ".."
             if(!in_array($value,array(".",".."))) {
                 $config[] = $value;
@@ -112,7 +123,7 @@ class IridiumController extends Controller
         // $this->stopVoice();
 
         // catureFile select
-        $cdir = scandir(env('GR_IRIDIUM'));
+        $cdir = scandir(env('PI_IRIDIUM_ROOT') . '/' . env('LOOT_CAPTURE'));
         foreach ($cdir as $key => $value) {         // Removes "." and ".."
             if(!in_array($value,array(".",".."))) {
                 $config[] = $value;

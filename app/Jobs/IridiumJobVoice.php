@@ -34,16 +34,14 @@ class IridiumJobVoice implements ShouldQueue
      */
     public function handle()
     {
-        // sudo iridium-extractor -D 4 software/gr-iridium/examples/rtl-sdr-T.conf | grep "A:OK" > Iridium/output/output3.bits
-        // $cmd = 'iridium-extractor -D' 
-        //         . escapeshellarg($this->init['d']) 
-        //         . ' ' . $this->init['config'] 
-        //         . ' ' . '| grep "A:OK" > ' . escapeshellarg($this->init['filename']);
-
-        $cmd = 'ping 8.8.8.8';
-        $this->proc = popen($cmd, 'r');
-        while (!feof($this->proc)) {
-            broadcast(new IridiumBroadcastVoice(fread($this->proc, 4096)));
+        if(env('APP_DEBUG')) {
+            $cmd = 'ping 8.8.8.8';
+            $this->proc = popen($cmd, 'r');
+            while (!feof($this->proc)) {
+                broadcast(new IridiumBroadcastVoice(fread($this->proc, 4096)));
+            }
+        } else {
+            // Logic
         }
     }
 }

@@ -30,7 +30,7 @@
 
                     <label for="config">SDR Config:</label> 
                     <select id = "config" name="config" value="4">
-                        @foreach ($data as $d)
+                        @foreach ($data_config as $d)
                             <option value="{{ $d }}">{{ $d }}</option>
                         @endforeach
                     </select>
@@ -71,7 +71,7 @@
 
                     <label for="captureFile">Capture File</label> 
                     <select id = "captureFile" name="captureFile" value="4">
-                        @foreach ($data as $d)
+                        @foreach ($data_capture as $d)
                             <option value="{{ $d }}">{{ $d }}</option>
                         @endforeach
                     </select>
@@ -100,7 +100,7 @@
 
                     <label for="captureFile">Capture File</label> 
                     <select id = "captureFile" name="captureFile" value="4">
-                        @foreach ($data as $d)
+                        @foreach ($data_capture as $d)
                             <option value="{{ $d }}">{{ $d }}</option>
                         @endforeach
                     </select>
