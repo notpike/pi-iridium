@@ -18,7 +18,7 @@ class IridiumController extends Controller
      */
     public function index() {
         // SDR Config builder
-        $cdir = scandir(env('GR_IRIDIUM'));
+        $cdir = scandir(env('GR_IRIDIUM'). '/examples');
         // Removes "." and ".."
         foreach ($cdir as $key => $value) {
             if(!in_array($value,array(".",".."))) {
