@@ -49,6 +49,8 @@ class IridiumJob implements ShouldQueue
                     . ' ' .  env('GR_IRIDIUM') . '/examples/' . trim($this->init['config'], '\'' ) 
                     . ' ' . '| grep "A:OK" > ' . base_path() . '/' . env('LOOT_CAPTURE') . '/' . trim(escapeshellarg($this->init['filename']),'\'');
 
+            $this->proc = popen($cmd, 'r');
+
             while (!feof($this->proc)) {
                 broadcast(new IridiumBroadcast(fread($this->proc, 4096)));
             }
