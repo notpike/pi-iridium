@@ -34,16 +34,31 @@ class IridiumJob implements ShouldQueue
      */
     public function handle()
     {
-        // sudo iridium-extractor -D 4 software/gr-iridium/examples/rtl-sdr-T.conf | grep "A:OK" > Iridium/output/output3.bits
-        // $cmd = 'iridium-extractor -D' 
-        //         . escapeshellarg($this->init['d']) 
-        //         . ' ' . $this->init['config'] 
-        //         . ' ' . '| grep "A:OK" > ' . escapeshellarg($this->init['filename']);
+        // $cmd = 'ping 1.1.1.1';
+        // $this->proc = popen($cmd, 'r');
+        
+        // while (!feof($this->proc)) {
+        //     broadcast(new IridiumBroadcast(fread($this->proc, 4096)));
+        // }
 
-        $cmd = 'ping 1.1.1.1';
-        $this->proc = popen($cmd, 'r');
-        while (!feof($this->proc)) {
-            broadcast(new IridiumBroadcast(fread($this->proc, 4096)));
-        }
+        if(env('APP_DEBUG')) {
+            $cmd = 'ping 1.1.1.1';
+            $this->proc = popen($cmd, 'r');
+
+            while (!feof($this->proc)) {
+                broadcast(new IridiumBroadcast(fread($this->proc, 4096)));
+            }
+        } else {
+            // sudo iridium-extractor -D 4 software/gr-iridium/examples/rtl-sdr-T.conf | grep "A:OK" > Iridium/output/output3.bits
+            $cmd = 'iridium-extractor -D' 
+                    . escapeshellarg($this->init['d']) 
+                    . ' ' . $this->init['config'] 
+                    . ' ' . '| grep "A:OK" > ' . env('LOOT_CAPTURE') . escapeshellarg($this->init['filename']);
+
+            while (!feof($this->proc)) {
+                broadcast(new IridiumBroadcast(fread($this->proc, 4096)));
+            }
+
+        // }
     }
 }

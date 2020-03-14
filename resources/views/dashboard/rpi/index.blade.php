@@ -19,9 +19,11 @@
             <div class="card">
             <div class="card-header">CPU Temp</div>
             <div class="card-body">
-                {{-- <p class="card-text">{{ $cpuTemp[0] / 1000 }} C</p> --}}
-                {{-- DEV USE ON QUBESOS --}}
-                <p class="card-text">{{ $cpuTemp[0] }} C</p> 
+                @if(env('APP_DEBUG'))
+                    <p class="card-text">{{ $cpuTemp[0] }}</p> 
+                @else
+                    <p class="card-text">{{ $cpuTemp[0] / 1000 }} C</p>
+                @endif
             </div>
             </div>
         </div>

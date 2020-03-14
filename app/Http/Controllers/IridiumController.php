@@ -59,8 +59,13 @@ class IridiumController extends Controller
 
     // KillAll hack FTW! >:D
     public function stopIridium() {
-        $cmd = 'killall ping';
-        $stdout = shell_exec($cmd);
+        if(env('APP_DEBUG')) {
+            $cmd = 'killall ping';
+            $stdout = shell_exec($cmd);
+        } else {
+            $cnd = 'killall iridium-extractor';
+            $stdout = shell_exec($cmd);
+        }
         return redirect()->back();
     }
 
@@ -91,14 +96,20 @@ class IridiumController extends Controller
 
     // KillAll hack FTW! >:D
     public function stopDecode() {
-        $cmd = 'killall ping';
-        $stdout = shell_exec($cmd);
+        if(env('APP_DEBUG')) {
+            $cmd = 'killall ping';
+            $stdout = shell_exec($cmd);
+        } else {
+            // $cmd = 'killall iridium-extractor';
+            // $stdout = shell_exec($cmd);
+        }
+
         return redirect()->back();
     }
 
     public function startVoice(Request $request) {
         // Kill any running processes
-        $this->stopVoice();
+        // $this->stopVoice();
 
         // catureFile select
         $cdir = scandir(env('GR_IRIDIUM'));
@@ -121,8 +132,13 @@ class IridiumController extends Controller
 
     // KillAll hack FTW! >:D
     public function stopVoice() {
-        $cmd = 'killall ping';
-        $stdout = shell_exec($cmd);
+        if(env('APP_DEBUG')) {
+            $cmd = 'killall ping';
+            $stdout = shell_exec($cmd);
+        } else {
+            // $cmd = 'killall iridium-extractor';
+            // $stdout = shell_exec($cmd);
+        }
         return redirect()->back();
     }    
 
