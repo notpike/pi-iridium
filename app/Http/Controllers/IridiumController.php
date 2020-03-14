@@ -122,7 +122,7 @@ class IridiumController extends Controller
         // Kill any running processes
         // $this->stopVoice();
 
-        // catureFile select
+        // Capture File Select
         $cdir = scandir(env('PI_IRIDIUM_ROOT') . '/' . env('LOOT_CAPTURE'));
         foreach ($cdir as $key => $value) {         // Removes "." and ".."
             if(!in_array($value,array(".",".."))) {
