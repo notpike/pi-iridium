@@ -47,7 +47,8 @@ class IridiumJob implements ShouldQueue
             $cmd = 'iridium-extractor -D ' 
                     . trim(escapeshellarg($this->init['d']), '\'') 
                     . ' ' .  env('GR_IRIDIUM') . '/examples/' . trim($this->init['config'], '\'' ) 
-                    . ' ' . '| grep "A:OK" > ' . base_path() . '/' . env('LOOT_CAPTURE') . '/' . trim(escapeshellarg($this->init['filename']),'\'');
+                    . ' ' . '| grep "A:OK" > ' . base_path() . '/' . env('LOOT_CAPTURE') . '/' . trim(escapeshellarg($this->init['filename']),'\'')
+                    . ' 2>&1';
 
             $this->proc = popen($cmd, 'r');
 
