@@ -38,7 +38,7 @@ class IridiumController extends Controller
         $this->stopIridium();
 
         // SDR Config builder
-        $cdir = scandir(env('GR_IRIDIUM'));
+        $cdir = scandir(env('GR_IRIDIUM'). '/examples');
         foreach ($cdir as $key => $value) {         // Removes "." and ".."
             if(!in_array($value,array(".",".."))) {
                 $config[] = $value;
