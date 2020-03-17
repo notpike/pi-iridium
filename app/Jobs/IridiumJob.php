@@ -35,15 +35,15 @@ class IridiumJob implements ShouldQueue
     public function handle()
     {
 
-        // if(env('APP_DEBUG')) {
-        //     $cmd = 'ping 1.1.1.1';
-        //     $this->proc = popen($cmd, 'r');
+        if(env('APP_DEBUG')) {
+            $cmd = 'ping 1.1.1.1';
+            $this->proc = popen($cmd, 'r');
 
-        //     while (!feof($this->proc)) {
-        //         broadcast(new IridiumBroadcast(fread($this->proc, 4096)));
-        //     }
-        // } else {
-            // sudo iridium-extractor -D 4 software/gr-iridium/examples/rtl-sdr-T.conf | grep "A:OK" > Iridium/output/output3.bits
+            while (!feof($this->proc)) {
+                broadcast(new IridiumBroadcast(fread($this->proc, 4096)));
+            }
+        } else {
+            // sudo iridium-extractor -D 4 software/gr-iridium/examlsples/rtl-sdr-T.conf | grep "A:OK" > Iridium/output/output3.bits
             $cmd = 'iridium-extractor -D ' 
                     . trim(escapeshellarg($this->init['d']), '\'') 
                     . ' ' .  env('GR_IRIDIUM') . '/examples/' . trim($this->init['config'], '\'' ) . ' 2>&1';
@@ -59,6 +59,6 @@ class IridiumJob implements ShouldQueue
             // broadcast(new IridiumBroadcast($this->proc));
 
 
-        //}
+        }
     }
 }
