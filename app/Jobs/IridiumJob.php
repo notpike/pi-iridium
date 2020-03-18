@@ -60,6 +60,9 @@ class IridiumJob implements ShouldQueue
 
         // $cmd = "ping 1.1.1.1";
 
+
+        broadcast(new IridiumBroadcast($cmd));
+
         $descr = array(
             0=> array('pipe', 'r'),
             1=> array('pipe', 'w'),
