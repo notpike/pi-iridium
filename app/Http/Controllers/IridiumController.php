@@ -72,7 +72,7 @@ class IridiumController extends Controller
             $cmd = 'killall ping';
             $stdout = shell_exec($cmd);
         } else {
-            $cnd = 'killall iridium-extractor';
+            $cmd = 'killall iridium-extractor';
             $stdout = shell_exec($cmd);
         }
         return redirect()->back();

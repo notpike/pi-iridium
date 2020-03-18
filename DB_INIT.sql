@@ -1,5 +1,5 @@
 
-CREATE USER 'user'@'localhost' IDENTIFIED BY 'user';
+CREATE USER 'user'@'localhost' IDENTIFIED BY 'pass';
 GRANT ALL PRIVILEGES ON * . * TO 'user'@'localhost';
 FLUSH PRIVILEGES;
 
