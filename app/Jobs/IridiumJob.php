@@ -40,8 +40,8 @@ class IridiumJob implements ShouldQueue
         // } else {
             $cmd = 'iridium-extractor -D '
                     . trim(escapeshellarg($this->init['d']), '\'') 
-                    . ' ' .  env('GR_IRIDIUM') . '/examples/' . trim($this->init['config'], '\'' );
-            //         . ' ' . '| grep "A:OK" > ' . base_path() . '/' . env('LOOT_CAPTURE') . '/' . trim(escapeshellarg($this->init['filename']),'\'');
+                    . ' ' .  env('GR_IRIDIUM') . '/examples/' . trim($this->init['config'], '\'' )
+                    . ' ' . '| grep "A:OK" > ' . base_path() . '/' . env('LOOT_CAPTURE') . '/' . trim(escapeshellarg($this->init['filename']),'\'');
             broadcast(new IridiumBroadcast($cmd));
         // }
 
