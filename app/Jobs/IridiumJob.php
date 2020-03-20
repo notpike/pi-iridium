@@ -14,6 +14,7 @@ class IridiumJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $proc;
+    public $proc2;
     public $init;
 
     /**
@@ -38,21 +39,29 @@ class IridiumJob implements ShouldQueue
         // if(env('APP_DEBUG')) {
         //     $cmd = 'ping 1.1.1.1';
         // } else {
-            $cmd = 'iridium-extractor -D '
-                    . trim(escapeshellarg($this->init['d']), '\'') 
-                    . ' ' .  env('GR_IRIDIUM') . '/examples/' . trim($this->init['config'], '\'' )
-                    . ' ' . '| grep "A:OK" > ' . base_path() . '/' . env('LOOT_CAPTURE') . '/' . trim(escapeshellarg($this->init['filename']),'\'');
+            // $cmd = 'iridium-extractor -D '
+            //         . trim(escapeshellarg($this->init['d']), '\'') 
+            //         . ' ' .  env('GR_IRIDIUM') . '/examples/' . trim($this->init['config'], '\'' );
+
+            // $cmd2 = 'grep \"A:OK\" > ' . base_path() . '/' . env('LOOT_CAPTURE') . '/' . trim(escapeshellarg($this->init['filename']),'\'');
+            $cmd2 = 'grep ping';
+
+
             broadcast(new IridiumBroadcast($cmd));
         // }
 
-        // $cmd = "ping -c 5 1.1.1.1";
-
+        $cmd = "ping -c 5 1.1.1.1";
 
         // TRY 1
-        $this->proc = popen($cmd . ' 2>&1', 'r');
+        $this->proc  = popen($cmd . ' 2>&1', 'r');
+        $this->proc2 = popen($cmd2, 'w');
         while (!feof($this->proc)) {
-            broadcast(new IridiumBroadcast(fread($this->proc, 4096)));
+            fwrite($this->proc, fread($this->proc, 4096));
+            broadcast(new IridiumBroadcast(fread($this->proc2, 4096)));
         }
+
+        pclose($cmd);
+        pclose($cmd2);
 
 
         // TRY 0
