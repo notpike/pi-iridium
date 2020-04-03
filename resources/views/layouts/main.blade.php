@@ -97,6 +97,7 @@
                             <a href="{{ route('home') }}" class="list-group-item list-group-item-action {{ Request::is('dashboard/home') ? 'active' : ''}} ">HOME</a>
                             <a href="{{ route('rpi.index') }}" class="list-group-item list-group-item-action {{ Request::is('dashboard/rpi') ? 'active' : ''}} ">RPI</a>
                             <a href="{{ route('iridium.index') }}" class="list-group-item list-group-item-action {{ Request::is('dashboard/iridium') ? 'active' : ''}} ">IRIDIUM</a>
+                            <a href="{{ route('capture.index') }}" class="list-group-item list-group-item-action {{ Request::is('dashboard/capture') ? 'active' : ''}} ">CAPTURES</a>
                         </div>
                     </div>
 

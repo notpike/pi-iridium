@@ -24,6 +24,11 @@ Route::get('/', function () {
 // Auth::routes();
 Auth::routes(['register' => false]);
 
+// // Files Auth
+// Route::prefix('loot')->middleware('auth')->group(function() {
+//     Route::get('{file}', 'fileController@fileStorageServe');
+// });
+
 
 Route::prefix('dashboard')->middleware('auth')->group(function() {
     
@@ -45,6 +50,9 @@ Route::prefix('dashboard')->middleware('auth')->group(function() {
 
     Route::get('/iridium/readIridium', 'IridiumController@readIridium')->name('iridium.readIridium');
     Route::resource('/iridium', 'IridiumController');
+
+    // Route::delete('/capture/destroy', 'CaptureController@destroy')->name('capture.destroy');
+    Route::resource('/capture', 'CaptureController');
 
     Route::get('/changePassword','HomeController@showChangePasswordForm')->name('changePasswordView');
     Route::post('/changePassword','HomeController@changePassword')->name('changePassword');
