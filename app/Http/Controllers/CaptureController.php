@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,9 @@ class CaptureController extends Controller
             'raw_capture' => Storage::files('public/loot/capture'),
             'decode'      => Storage::files('public/loot/decode'),
             'voice'       => Storage::files('public/loot/voice')
+            // 'raw_capture' => File::files(public_path().'/../loot/capture'),
+            // 'decode'      => File::files(public_path().'/../loot/decode'),
+            // 'voice'       => File::files(public_path().'/../loot/voice')
         ]);
     }
 

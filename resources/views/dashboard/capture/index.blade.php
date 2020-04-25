@@ -54,7 +54,34 @@
             <div class="card">
             <div class="card-header">Decoded Captures</div>
             <div class="card-body">
-                <p class="card-text">Holder</p>
+                
+            <table class="table table-bordered data-table">
+                <tbody>
+                    @foreach ($decode as $decode_file)
+                        @if(basename($decode_file) == '.gitattributes')
+                            <!-- SKIP -->
+                        @else
+                            <tr>
+                                <td>{{ basename($decode_file) }}</td>                                                                 
+
+                                <td>
+                                    <a href="/decode/{{ basename($decode_file) }}" class="btn btn-primary">Download</a>
+                                    
+                                    <form action="{{ route('capture.destroy', 'kill') }}" method="POST">
+                                        {{method_field('DELETE')}}
+                                        {{csrf_field()}}
+                                        <input type="hidden" class="form-control" id="file" name="file" value="{{ $decode_file }}">
+
+                                        <input type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')" value="Delete"/>
+                                    </form>
+                                </td>
+
+                            </tr> 
+                        @endif
+                    @endforeach
+                </tbody>  
+            </table>
+
             </div>
             </div>
 
@@ -68,11 +95,39 @@
             <div class="card">
             <div class="card-header">Audio Captures</div>
             <div class="card-body">
-                <p class="card-text">Holder</p>
+
+            <table class="table table-bordered data-table">
+                <tbody>
+                    @foreach ($voice as $voice_file)
+                        @if(basename($voice_file) == '.gitattributes')
+                            <!-- SKIP -->
+                        @else
+                            <tr>
+                                <td>{{ basename($voice_file) }}</td>                                                                 
+
+                                <td>
+                                    <a href="/voice/{{ basename($voice_file) }}" class="btn btn-primary">Download</a>
+                                    
+                                    <form action="{{ route('capture.destroy', 'kill') }}" method="POST">
+                                        {{method_field('DELETE')}}
+                                        {{csrf_field()}}
+                                        <input type="hidden" class="form-control" id="file" name="file" value="{{ $voice_file }}">
+
+                                        <input type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')" value="Delete"/>
+                                    </form>
+                                </td>
+
+                            </tr> 
+                        @endif
+                    @endforeach
+                </tbody>  
+            </table>
+
             </div>
             </div>
 
     </div>
     </div>
 
+</div>
 @endsection
