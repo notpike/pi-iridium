@@ -80,10 +80,13 @@ class IridiumJobDecode implements ShouldQueue
                  . ' -m ' . trim(escapeshellarg($this->init['mode']), "\'")
                  . ' > ' . base_path() . '/' . env('LOOT_DECODE') . '/' . trim(escapeshellarg($this->init['filename']), "\'");
 
+        // Show content        
+        $cmd3 = 'cat ' . base_path() . '/' . env('LOOT_DECODE') . '/' . trim(escapeshellarg($this->init['filename']), "\'");
         var_dump($cmd);
 
         $this->proc_cmd($cmd);
         $this->proc_cmd($cmd2);
+        $this->proc_cmd($cmd3);
 
 
         
