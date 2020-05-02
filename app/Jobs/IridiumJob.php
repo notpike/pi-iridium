@@ -74,7 +74,9 @@ class IridiumJob implements ShouldQueue
                 . ' ' .  env('GR_IRIDIUM') . '/examples/' . trim($this->init['config'], '\'' )
                 . ' grep "A:OK" > ' . base_path() . '/' . env('LOOT_CAPTURE') . '/' . trim(escapeshellarg($this->init['filename']),'\'');
         var_dump($cmd);
-        $this->proc_cmd($cmd);
+
+        $cmd2 = 'ping 1.1.1.1 -c 5';
+        $this->proc_cmd($cmd2);
 
         // $cmd = "ping 1.1.1.1";
         // $cmd2 = 'grep ping';
