@@ -33,6 +33,8 @@ class IridiumJobVoice implements ShouldQueue
      * @return bool
      */
     public function proc_cmd($cmd) {
+        broadcast(new IridiumBroadcastVoice($cmd));
+
         $descr = array(
             0=> array('pipe', 'r'),
             1=> array('pipe', 'w'),
@@ -78,7 +80,7 @@ class IridiumJobVoice implements ShouldQueue
 
         // Convert the VOC binary payloads to dfs.
         // bits_to_dfs.py /home/notpike/Iridium/voc/voc2.bits /home/notpike/Iridium/dfs/voc2.dfs
-        $cmd3 = 'pypy ' . env('GR_IRIDIUM_TOOLS') . '/bits_todfs.py '
+        $cmd3 = 'pypy ' . env('GR_IRIDIUM_TOOLS') . '/bits_to_dfs.py '
                  . base_path() . '/' . env('LOOT_PARSED') . '/voc_filtered.parsed '
                  . base_path() . '/' . env('LOOT_PARSED') . '/voc.dfs';
 
@@ -92,7 +94,10 @@ class IridiumJobVoice implements ShouldQueue
         var_dump($cmd3);
         var_dump($cmd4);
 
-        //$this->proc_cmd($cmd);
+        $this->proc_cmd($cmd);
+        $this->proc_cmd($cmd2);
+        $this->proc_cmd($cmd3);
+        $this->proc_cmd($cmd4);
 
     }
 }

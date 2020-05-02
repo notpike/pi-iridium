@@ -33,6 +33,8 @@ class IridiumJobDecode implements ShouldQueue
      * @return bool
      */
     public function proc_cmd($cmd) {
+        broadcast(new IridiumBroadcastDecode($cmd));
+
         $descr = array(
             0=> array('pipe', 'r'),
             1=> array('pipe', 'w'),
@@ -67,22 +69,21 @@ class IridiumJobDecode implements ShouldQueue
 
         // Parse
         // pypy iridium-parser.py -p output.bits
-        $cmd = 'pypy ' . base_path() . '/' . env('GR_IRIDIUM_TOOLS') . '/iridium-parser.py '
+        $cmd = 'pypy ' . env('GR_IRIDIUM_TOOLS') . '/iridium-parser.py '
                 . base_path() . '/' . env('LOOT_CAPTURE') . '/' . trim(escapeshellarg($this->init['captureFile']), "\'") 
                 . ' > ' . base_path() . '/' . env('LOOT_PARSED') . '/decode.parsed';
 
         // Decode
         // pypy reassembler.py -i output.parsed -m <mode>
-        $cmd2 = 'pypy ' . base_path() . '/' . env('GR_IRIDIUM_TOOLS') . '/reassembler.py -i '
+        $cmd2 = 'pypy ' . env('GR_IRIDIUM_TOOLS') . '/reassembler.py -i '
                  . base_path() . '/' . env('LOOT_PARSED') . '/decode.parsed'
                  . ' -m ' . trim(escapeshellarg($this->init['mode']), "\'")
-                 . ' > ' . base_path() . '/' . env('LOOT_DECODE') . '/' . trim(escapeshellarg($this->init['filename']), "\'")
-                 . '_[' . strtoupper(trim(escapeshellarg($this->init['mode']), "\'")) . '].txt';
+                 . ' > ' . base_path() . '/' . env('LOOT_DECODE') . '/' . trim(escapeshellarg($this->init['filename']), "\'");
 
         var_dump($cmd);
 
-        // $this->proc_cmd($cmd);
-        // $this->proc_cmd($cmd2);
+        $this->proc_cmd($cmd);
+        $this->proc_cmd($cmd2);
 
 
         
