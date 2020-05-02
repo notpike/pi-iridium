@@ -86,9 +86,6 @@ class IridiumJobDecode implements ShouldQueue
 
         $this->proc_cmd($cmd);
         $this->proc_cmd($cmd2);
-        $this->proc_cmd($cmd3);
-
-
-        
+        $this->proc_cmd($cmd3);   
     }
 }
