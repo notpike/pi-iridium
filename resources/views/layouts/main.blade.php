@@ -67,6 +67,16 @@
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                 @csrf
                                             </form>
+
+                                            <a class="dropdown-item" href="{{ route('changePasswordView') }}"
+                                               onclick="event.preventDefault();
+                                                             document.getElementById('password-form').submit();">
+                                                {{ __('Change Password') }}
+                                            </a>
+        
+                                            <form id="password-form" action="{{ route('changePasswordView') }}" method="GET" style="display: none;">
+                                                @csrf
+                                            </form>
                                         </div>
                                     </li>
                                 @endguest
@@ -87,6 +97,7 @@
                             <a href="{{ route('home') }}" class="list-group-item list-group-item-action {{ Request::is('dashboard/home') ? 'active' : ''}} ">HOME</a>
                             <a href="{{ route('rpi.index') }}" class="list-group-item list-group-item-action {{ Request::is('dashboard/rpi') ? 'active' : ''}} ">RPI</a>
                             <a href="{{ route('iridium.index') }}" class="list-group-item list-group-item-action {{ Request::is('dashboard/iridium') ? 'active' : ''}} ">IRIDIUM</a>
+                            <a href="{{ route('capture.index') }}" class="list-group-item list-group-item-action {{ Request::is('dashboard/capture') ? 'active' : ''}} ">CAPTURES</a>
                         </div>
                     </div>
 
@@ -106,6 +117,31 @@
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>  
+
+    {{-- websocket --}}
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        Echo.channel('iridium')
+        .listen('IridiumBroadcast', (e) => {
+            document.getElementById('output').innerHTML += e.message + '\n';
+        });
+
+        Echo.channel('iridium-decode')
+        .listen('IridiumBroadcastDecode', (e) => {
+            document.getElementById('output_decode').innerHTML += e.message + '\n';
+        });
+
+        Echo.channel('iridium-voice')
+        .listen('IridiumBroadcastVoice', (e) => {
+            document.getElementById('output_voice').innerHTML += e.message + '\n';
+        });
+
+        // Echo.private(`iridium`)
+        //     .listen('IridiumBroadcast', (e) => {
+        //     console.log(e.message);
+        //     document.getElementById('output').innerHTML += e.message + '\n';
+        //  })
+    </script>
 
 </body>
 </html>

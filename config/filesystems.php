@@ -79,6 +79,9 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('raw_capture') => storage_path('app/public/loot/capture'),
+        public_path('decode') => storage_path('app/public/loot/decode'),
+        public_path('voice') => storage_path('app/public/loot/voice'),
     ],
 
 ];

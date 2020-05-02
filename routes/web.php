@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IridiumController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,11 @@ Route::get('/', function () {
 // Auth::routes();
 Auth::routes(['register' => false]);
 
+// // Files Auth
+// Route::prefix('loot')->middleware('auth')->group(function() {
+//     Route::get('{file}', 'fileController@fileStorageServe');
+// });
+
 
 Route::prefix('dashboard')->middleware('auth')->group(function() {
     
@@ -33,6 +39,22 @@ Route::prefix('dashboard')->middleware('auth')->group(function() {
     Route::resource('/rpi', 'RpiController');
 
 
+    Route::put('/iridium/startIridium', 'IridiumController@startIridium')->name('iridium.startIridium');
+    Route::get('/iridium/stopIridium', 'IridiumController@stopIridium')->name('iridium.stopIridium');
+
+    Route::put('/iridium/startDecode', 'IridiumController@startDecode')->name('iridium.startDecode');
+    Route::get('/iridium/stopDecode', 'IridiumController@stopDecode')->name('iridium.stopDecode');
+
+    Route::put('/iridium/startVoice', 'IridiumController@startVoice')->name('iridium.startVoice');
+    Route::get('/iridium/stopVoice', 'IridiumController@stopVoice')->name('iridium.stopVoice');
+
+    Route::get('/iridium/readIridium', 'IridiumController@readIridium')->name('iridium.readIridium');
     Route::resource('/iridium', 'IridiumController');
+
+    // Route::delete('/capture/destroy', 'CaptureController@destroy')->name('capture.destroy');
+    Route::resource('/capture', 'CaptureController');
+
+    Route::get('/changePassword','HomeController@showChangePasswordForm')->name('changePasswordView');
+    Route::post('/changePassword','HomeController@changePassword')->name('changePassword');
 
 });
