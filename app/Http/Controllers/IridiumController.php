@@ -18,7 +18,7 @@ class IridiumController extends Controller
         $cdir = scandir(env('GR_IRIDIUM'). '/examples');
         // Removes "." and ".."
         foreach ($cdir as $key => $value) {
-            if(!in_array($value,array(".",".."))) {
+            if(!in_array($value,array(".","..", ".gitattributes"))) {
                 $config[] = $value;
             }
         }
@@ -26,7 +26,7 @@ class IridiumController extends Controller
         $cdir = scandir(base_path() . '/' . env('LOOT_CAPTURE'));
         // Removes "." and ".."
         foreach ($cdir as $key => $value) {
-            if(!in_array($value,array(".",".."))) {
+            if(!in_array($value,array(".","..", ".gitattributes"))) {
                 $capture[] = $value;
             }
         }
