@@ -87,7 +87,8 @@ class IridiumJobVoice implements ShouldQueue
         // Convert to Wave 
         // iridium-toolkit/ambe_emu/ambe -w /home/notpike/Iridium/dfs/voc2.dfs 
         $cmd4 = env('GR_IRIDIUM_TOOLS') . '/ambe_emu/ambe -w '
-                . base_path() . '/' . env('LOOT_VOICE') . '/' . trim(escapeshellarg($this->init['filename']), "\'");
+                     . base_path() . '/' . env('LOOT_PARSED') . '/voc.dfs';
+                     //. base_path() . '/' . env('LOOT_VOICE') . '/' . trim(escapeshellarg($this->init['filename']), "\'");
 
         var_dump($cmd);
         var_dump($cmd2);
