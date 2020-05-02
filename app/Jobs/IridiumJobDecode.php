@@ -28,22 +28,63 @@ class IridiumJobDecode implements ShouldQueue
     }
 
     /**
+     * PROC FUNCTION.
+     *
+     * @return bool
+     */
+    public function proc_cmd($cmd) {
+        $descr = array(
+            0=> array('pipe', 'r'),
+            1=> array('pipe', 'w'),
+            2=> array('pipe', 'w')
+        );
+
+        $pipes = array();
+        $proc = proc_open($cmd, $descr, $pipes);
+        if(is_resource($proc)) {
+            while($f = fgets($pipes[1])) {
+                broadcast(new IridiumBroadcastDecode("pipe 1-->"));
+                broadcast(new IridiumBroadcastDecode($f));
+            }
+            fclose($pipes[1]);
+            while ($f = fgets($pipes[2])) {
+                broadcast(new IridiumBroadcastDecode("pipe 2-->"));
+                broadcast(new IridiumBroadcastDecode(($f)));
+            }
+            fclose($pipes[2]);
+            proc_close($proc);
+        }
+        return true;  
+    } 
+
+    /**
      * Execute the job.
      *
      * @return void
      */
     public function handle()
     {
-        // sudo iridium-extractor -D 4 software/gr-iridium/examples/rtl-sdr-T.conf | grep "A:OK" > Iridium/output/output3.bits
-        // $cmd = 'iridium-extractor -D' 
-        //         . escapeshellarg($this->init['d']) 
-        //         . ' ' . $this->init['config'] 
-        //         . ' ' . '| grep "A:OK" > ' . escapeshellarg($this->init['filename']);
 
-        $cmd = 'ping 8.8.4.4';
-        $this->proc = popen($cmd, 'r');
-        while (!feof($this->proc)) {
-            broadcast(new IridiumBroadcastDecode(fread($this->proc, 4096)));
-        }
+        // Parse
+        // pypy iridium-parser.py -p output.bits
+        $cmd = 'pypy ' . base_path() . '/' . env('GR_IRIDIUM_TOOLS') . '/iridium-parser.py '
+                . base_path() . '/' . env('LOOT_CAPTURE') . '/' . trim(escapeshellarg($this->init['captureFile']), "\'") 
+                . ' > ' . base_path() . '/' . env('LOOT_PARSED') . '/decode.parsed';
+
+        // Decode
+        // pypy reassembler.py -i output.parsed -m <mode>
+        $cmd2 = 'pypy ' . base_path() . '/' . env('GR_IRIDIUM_TOOLS') . '/reassembler.py -i '
+                 . base_path() . '/' . env('LOOT_PARSED') . '/decode.parsed'
+                 . ' -m ' . trim(escapeshellarg($this->init['mode']), "\'")
+                 . ' > ' . base_path() . '/' . env('LOOT_DECODE') . '/' . trim(escapeshellarg($this->init['filename']), "\'")
+                 . '_[' . strtoupper(trim(escapeshellarg($this->init['mode']), "\'")) . '].txt';
+
+        var_dump($cmd);
+
+        // $this->proc_cmd($cmd);
+        // $this->proc_cmd($cmd2);
+
+
+        
     }
 }

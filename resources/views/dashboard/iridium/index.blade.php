@@ -81,7 +81,7 @@
                     <label for="d">Output File:</label> 
                     <input type="text" id="filename" name="filename" size="20" value="{{ 'decode_' . $time . '.txt'}}">
 
-                    <a href="{{ route('iridium.stopIridium') }}"  class="float-right btn btn-danger">STOP</a>
+                    <!-- <a href="{{ route('iridium.stopIridium') }}"  class="float-right btn btn-danger">STOP</a> -->
                     <button type="submit" class="float-right btn btn-primary">START</button>
                 </form>
         </div>   
@@ -108,9 +108,9 @@
                     &nbsp
 
                     <label for="d">Output File:</label> 
-                    <input type="text" id="filename" name="filename" size="20" value="{{ 'vox_' . $time . '.wav'}}">
+                    <input type="text" id="filename" name="filename" size="20" value="{{ 'voc_' . $time . '.wav'}}">
 
-                    <a href="{{ route('iridium.stopVoice') }}"  class="float-right btn btn-danger">STOP</a>
+                    <!-- <a href="{{ route('iridium.stopVoice') }}"  class="float-right btn btn-danger">STOP</a> -->
                     <button type="submit" class="float-right btn btn-primary">START</button>
                 </form>
         </div>  

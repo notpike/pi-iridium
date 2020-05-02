@@ -36,20 +36,21 @@ class IridiumJob implements ShouldQueue
     public function handle()
     {
 
-        // if(env('APP_DEBUG')) {
-        //     $cmd = 'ping 1.1.1.1';
-        // } else {
-            // $cmd = 'iridium-extractor -D '
-            //         . trim(escapeshellarg($this->init['d']), '\'') 
-            //         . ' ' .  env('GR_IRIDIUM') . '/examples/' . trim($this->init['config'], '\'' );
+        if(env('APP_DEBUG')) {
+            $cmd = 'ping 1.1.1.1';
+        } else {
+            // iridium-extractor -D 4 examples/hackrf.conf | grep "A:OK" > output.bits
+            $cmd = 'iridium-extractor -D '
+                    . trim(escapeshellarg($this->init['d']), '\'') 
+                    . ' ' .  env('GR_IRIDIUM') . '/examples/' . trim($this->init['config'], '\'' )
+                    . ' grep "A:OK" > ' . base_path() . '/' . env('LOOT_CAPTURE') . '/' . trim(escapeshellarg($this->init['filename']),'\'');
+            var_dump($cmd);
+            //broadcast(new IridiumBroadcast($cmd));
+        }
 
-            // $cmd2 = 'grep \"A:OK\" > ' . base_path() . '/' . env('LOOT_CAPTURE') . '/' . trim(escapeshellarg($this->init['filename']),'\'');
-            // broadcast(new IridiumBroadcast($cmd));
-        // }
-
-        $cmd = "ping 1.1.1.1";
+        // $cmd = "ping 1.1.1.1";
         // $cmd2 = 'grep ping';
-        broadcast(new IridiumBroadcast($cmd));
+        // broadcast(new IridiumBroadcast($cmd));
 
         // TRY 1
         // $this->proc  = popen($cmd . ' 2>&1', 'r');
@@ -77,29 +78,26 @@ class IridiumJob implements ShouldQueue
 
 
         // TRY 2
-        $descr = array(
-            0=> array('pipe', 'r'),
-            1=> array('pipe', 'w'),
-            2=> array('pipe', 'w')
-        );
+        // $descr = array(
+        //     0=> array('pipe', 'r'),
+        //     1=> array('pipe', 'w'),
+        //     2=> array('pipe', 'w')
+        // );
 
-        $pipes = array();
-        $proc = proc_open($cmd, $descr, $pipes);
-        if(is_resource($proc)) {
-            while($f = fgets($pipes[1])) {
-                broadcast(new IridiumBroadcast("pipe 1-->"));
-                broadcast(new IridiumBroadcast($f));
-            }
-            fclose($pipes[1]);
-            while ($f = fgets($pipes[2])) {
-                broadcast(new IridiumBroadcast("pipe 2-->"));
-                broadcast(new IridiumBroadcast(($f)));
-            }
-            fclose($pipes[2]);
-            proc_close($proc);
-        }
-        
-
-        
+        // $pipes = array();
+        // $proc = proc_open($cmd, $descr, $pipes);
+        // if(is_resource($proc)) {
+        //     while($f = fgets($pipes[1])) {
+        //         broadcast(new IridiumBroadcast("pipe 1-->"));
+        //         broadcast(new IridiumBroadcast($f));
+        //     }
+        //     fclose($pipes[1]);
+        //     while ($f = fgets($pipes[2])) {
+        //         broadcast(new IridiumBroadcast("pipe 2-->"));
+        //         broadcast(new IridiumBroadcast(($f)));
+        //     }
+        //     fclose($pipes[2]);
+        //     proc_close($proc);
+        // } 
     }
 }
