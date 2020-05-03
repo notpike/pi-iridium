@@ -29,7 +29,7 @@ Built with Laravel 7 for PHP 7.2.5+ and MySQL for the DB, this was a exercise fo
 $ git clone https://github.com/notpike/pi-iridium
 $ ./INIT.sh
 ```
-After you run the INIT.sh script, update the .env file found in the root directory of pi-iridium with the gr-iridium and iridium-toolkit file paths. Be sure to use the full system path (ex. /home/user/gr-iridium) 
+After you run the INIT.sh script, update lines 48 and 49 the .env file found in the root directory of pi-iridium. Be sure to use the full system paths (ex. /home/user/gr-iridium) for gr-iridium and iridium-toolkit folders.
 
 ## Run
 #### Local Server
