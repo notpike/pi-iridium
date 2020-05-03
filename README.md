@@ -15,7 +15,7 @@ HI! :D
 
 This is my (alpha) gr-iridium web controler for the RPI. This application was built to act as a web UI for the existing [gr-iridium](https://github.com/muccc/gr-iridium) binary and [iridium-toolkit](https://github.com/muccc/iridium-toolkit) scripts. 
 
-Built with Laravel 7 for PHP 7.2.5+, this was a exercise for me to become more proficient with PHP/Laravel development and learn more about how PHP handles websockets and async jobs. In my expirence, creating this RPI app using Laravel wasn't the best use for this tech, Node.JS may be a better fit for any future progress with this web UI.
+Built with Laravel 7 for PHP 7.2.5+, this was a exercise for me to become more proficient with PHP/Laravel development and learn more about how PHP handles websockets and async jobs. In my experience, Using PHP/Laravel wasn't the best use for this tech for building a dedicated controller for a RPI. Node.JS may be a better fit for any future progress with this web UI.
 
 ## Install
 ```
@@ -40,9 +40,9 @@ $ ./START.sh
 $ ./STOP.sh
 ```
 
-## Login
-User: iridium
-Pass: iridium
+## Web Login
+- User: iridium
+- Pass: iridium
 
 ## Security
 Below are known security issues for this alpha. No plans on correcting these for the alpha. Future versions of this will be done in Node.js. :)  
