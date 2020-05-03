@@ -15,9 +15,16 @@ HI! :D
 
 This is my (alpha) gr-iridium web controler for the RPI. This application was built to act as a web UI for the existing [gr-iridium](https://github.com/muccc/gr-iridium) binary and [iridium-toolkit](https://github.com/muccc/iridium-toolkit) scripts. 
 
-Built with Laravel 7 for PHP 7.2.5+, this was a exercise for me to become more proficient with PHP/Laravel development and learn more about how PHP handles websockets and async jobs. In my experience, Using PHP/Laravel wasn't the best use for this tech for building a dedicated controller for a RPI. Node.JS may be a better fit for any future progress with this web UI.
+Built with Laravel 7 for PHP 7.2.5+ and MySQL for the DB, this was a exercise for me to become more proficient with PHP/Laravel development and learn more about how PHP handles websockets and async jobs. In my experience, Using PHP/Laravel wasn't the best use for this tech for building a dedicated controller for a RPI. Node.JS may be a better fit for any future progress with this web UI.
 
 ## Install
+#### Required Software
+- PHP 7+
+- MySQL
+- gr-iridium
+- iridium-toolkit
+- GNU Radio 
+
 ```
 $ git clone https://github.com/notpike/pi-iridium
 $ ./INIT.sh
@@ -26,16 +33,19 @@ After you run the INIT.sh script, update the .env file found in the root directo
 
 ## Run
 #### Local Server
+If you want to run this localy use the following script.
 ```
 $ ./START_LOCAL.sh
 ```
 
 #### Remote Server
+Remote services use this.
 ```
 $ ./START.sh
 ```
 
 #### Stop Service
+To stop the service, use the script below.
 ```
 $ ./STOP.sh
 ```
@@ -45,7 +55,7 @@ $ ./STOP.sh
 - Pass: iridium
 
 ## Security
-Below are known security issues for this alpha. No plans on correcting these for the alpha. Future versions of this will be done in Node.js. :)  
+Below are known security issues for this alpha. No plans on correcting these for the alpha. Future versions of this will be done in Node.js. Also like I said, it's just an alpha. :)  
 
 - DB creds are built from DB_INIT.sql (which is loaded by running INIT.sh) and creates user 'user' has a password of 'pass'. If you change this be sure the creds are reflected in the .env file.
 - Websockets are PUBLIC
