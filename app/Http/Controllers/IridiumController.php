@@ -24,6 +24,7 @@ class IridiumController extends Controller
         }
 
         $cdir = scandir(base_path() . '/' . env('LOOT_CAPTURE'));
+        $capture[] = "SELECT FILE";
         // Removes "." and ".."
         foreach ($cdir as $key => $value) {
             if(!in_array($value,array(".","..", ".gitattributes"))) {
